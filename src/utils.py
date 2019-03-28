@@ -59,7 +59,7 @@ def simple_plot_by_date(dataframe, name, feature, start_day, end_day, interval_d
 def hit_count(predictions, real):    
     number_of_hits = 0
     up_hit = down_hit = 0    
-    for i in range(1, len(horizon_predicted)):
+    for i in range(1, len(predictions)):
         up_hit = predictions[i-1]>predictions[i] and real[i-1]>real[i]
         down_hit = predictions[i-1]<predictions[i] and real[i-1]<real[i]
         if up_hit or down_hit:
