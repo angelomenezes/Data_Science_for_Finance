@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 class MTRTimeSeries:
     def __init__(self, time_serie, window_size=20, horizon_size=5,
                  init_buffer_size=200, max_buffer_size=None,
-                 use_exp_smoothing=False, gamma=0.1):
+                 use_exp_smoothing=False, gamma=0.1, sst_method='predictions'):
 
         self.init_buffer_size = init_buffer_size
         if max_buffer_size is None:
@@ -20,6 +20,7 @@ class MTRTimeSeries:
         self.horizon_size = horizon_size
         self.use_exp_smoothing = use_exp_smoothing
         self.gamma = gamma
+        self.sst_method = sst_method
 
     def set_regressor(self, regressor, regressor_params):
         self._regressor = regressor
@@ -53,7 +54,8 @@ class MTRTimeSeries:
             sst = StackedSingleTarget(
                 n_targets=self.horizon_size,
                 default_regressor=self._regressor,
-                default_regressor_params=self._regressor_params
+                default_regressor_params=self._regressor_params,
+                method=self.sst_method
             )
             scaler_x = StandardScaler()
             scaler_y = StandardScaler()
