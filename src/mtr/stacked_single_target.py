@@ -16,7 +16,7 @@ class StackedSingleTarget:
 
     def __init__(self, n_targets, default_regressor=None,
                  default_regressor_params=None, method='predictions',
-                 n_part=None):
+                 n_part=10):
         """ Constructs a SST model with the default configurations.
 
             Parameters

@@ -47,6 +47,7 @@ class MTRTimeSeries:
             (self.window_size + self.horizon_size)
 
         predictions = []
+        s_idx -= 1
         while i < stop_point:
             data = pd.DataFrame.from_dict(
                 ml_observations, orient='index'
@@ -80,11 +81,10 @@ class MTRTimeSeries:
             predictions.extend(
                 scaler_y.inverse_transform(sst.predict(new_x)).tolist()[0]
             )
-
+            
             old_idx = s_idx
-            if s_idx >= self.max_buffer_size:
+            if s_idx >= self.max_buffer_size - 1:
                 s_idx = 0
-                old_idx -= 1
             else:
                 s_idx += 1
 
