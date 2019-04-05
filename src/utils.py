@@ -1,3 +1,14 @@
+import pandas as pd  #pandas does things with matrixes
+import numpy as np #used for sorting a matrix
+import matplotlib.pyplot as plt #matplotlib is used for plotting data
+import matplotlib.ticker as ticker #used for changing tick spacing
+import datetime as dt #used for dates
+import matplotlib.dates as mdates #used for dates, in a different way
+import os #used for changes of directory
+import warnings
+warnings.filterwarnings("ignore")
+
+
 def simple_plot(dataframe, name, feature, interval_day = 60):
     
     allstocksingle = dataframe[dataframe['Name'] == name] #makes matrix with only the stock info
