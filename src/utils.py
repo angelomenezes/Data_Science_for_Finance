@@ -98,7 +98,16 @@ def TU(z, z_hat):
     return num/den
 
 
-def POCID(z, z_hat, h=1):
+def POCID(z, z_hat):
+    p = 0
+    for t in range(1, len(z)):
+        aux = (z_hat[t] - z_hat[t - 1]) * (z[t] - z[t - 1])
+        p += 1 if aux > 0 else 0
+
+    return p/(len(z) - 1) * 100
+
+
+def MSA_POCID(z, z_hat, h=1):
     pocids = []
     start = 1
     while start < len(z) - h:
