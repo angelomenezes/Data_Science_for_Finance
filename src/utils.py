@@ -96,3 +96,17 @@ def TU(z, z_hat):
     den = np.sum((z[1:] - z[:(len(z) - 1)]) ** 2) + 1e-6
 
     return num/den
+
+
+def POCID(z, z_hat, h=1):
+    pocids = []
+    start = 1
+    while start < len(z) - h:
+        p = 0
+        for t in range(start, start + h):
+            aux = (z_hat[t] - z_hat[t - 1]) * (z[t] - z[t - 1])
+            p += 1 if aux > 0 else 0
+        p /= h
+        pocids.append(p * 100)
+        start += h
+    return np.mean(pocids)
