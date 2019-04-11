@@ -81,7 +81,7 @@ class MTRTimeSeries:
             predictions.extend(
                 scaler_y.inverse_transform(sst.predict(new_x)).tolist()[0]
             )
-            
+
             old_idx = s_idx
             if s_idx >= self.max_buffer_size - 1:
                 s_idx = 0
