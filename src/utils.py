@@ -74,7 +74,16 @@ def simple_plot_by_date(dataframe, name, feature, start_day, end_day,
     plt.ylabel(feature + ' Price')  # labels y axis
     plt.xlabel('Date')  # labels x axis
 
+# A function that will do a fit after each prediction
 
+def walk_foward_prediction(model, epoch_update, test_x, true_label):   
+    predictions = []
+    for i in range(test_x.shape[0]):
+        predictions.append(model.predict(test_x[i]))
+        _ = model.fit(test_x[i], true_label[i], epochs=epoch_update, verbose=0)
+    return predictions
+    
+    
 # Defining a hit counter function
 def hit_count(predictions, real):
     number_of_hits = 0
